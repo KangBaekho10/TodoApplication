@@ -48,8 +48,9 @@ class TodoCardController(
 
     @DeleteMapping("/{userId}")
     fun deleteTodoCard(@PathVariable userId: Long) : ResponseEntity<Unit> {
+        todoCardService.deleteTodoCard(userId)
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
-            .body(todoCardService.deleteTodoCard(userId))
+            .build()
     } // 삭제
 }
