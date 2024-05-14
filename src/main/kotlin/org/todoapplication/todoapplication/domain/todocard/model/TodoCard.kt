@@ -26,7 +26,7 @@ class TodoCard (
 
 fun TodoCard.toResponse(): TodoCardResponse {
     return TodoCardResponse(
-        userId = userid!!,
+        userid = userid!!,
         title = title,
         writer = writer,
         content = content,

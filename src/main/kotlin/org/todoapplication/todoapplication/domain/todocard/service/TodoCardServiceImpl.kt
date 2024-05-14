@@ -21,8 +21,8 @@ class TodoCardServiceImpl(
     }
 
 
-    override fun getTodoCardById(userId: Long): TodoCardResponse{
-        val todoCard = todoCardRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("TodoCard", userId)
+    override fun getTodoCardById(userid: Long): TodoCardResponse{
+        val todoCard = todoCardRepository.findByIdOrNull(userid) ?: throw ModelNotFoundException("TodoCard", userid)
         return todoCard.toResponse()
     }
 
@@ -39,8 +39,8 @@ class TodoCardServiceImpl(
     }
 
     @Transactional
-    override fun updateTodoCard(userId: Long, request: UpdateTodoCardRequest): TodoCardResponse {
-        val todoCard = todoCardRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("TodoCard", userId)
+    override fun updateTodoCard(userid: Long, request: UpdateTodoCardRequest): TodoCardResponse {
+        val todoCard = todoCardRepository.findByIdOrNull(userid) ?: throw ModelNotFoundException("TodoCard", userid)
         val (writer, title, content) = request
 
         todoCard.writer = writer
@@ -51,8 +51,8 @@ class TodoCardServiceImpl(
     }
 
     @Transactional
-    override fun deleteTodoCard(userId: Long){
-        val todoCard = todoCardRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("TodoCard", userId)
+    override fun deleteTodoCard(userid: Long){
+        val todoCard = todoCardRepository.findByIdOrNull(userid) ?: throw ModelNotFoundException("TodoCard", userid)
         todoCardRepository.delete(todoCard)
     }
 }
