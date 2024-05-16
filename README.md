@@ -41,12 +41,16 @@ Q1. API의 request를 어떤 방식으로 사용하셨나요?
 > 2. 주소를 이용하지 않아서 데이터양이 많은 경우에 적합하기 때문입니다.
 
 Q2. RESTful 한 API를 설계하셨나요?
-> A. 네, 그렇습니다. 이유는 다음과 같습니다.<br/>
+> A. 네, 그렇습니다. 이유는 다음과 같습니다. <br/>
 >
-> 1. Resource의 이름을 명사, 소문자, 복수형으로 지향하였으며, '/'를 통해 계층 관계를 표현하였습니다. (예> /todocards)<br/>
-> 2. id Resource를 가져오기 위해 Identifier를 포함하였습니다. (예> /todocards/{userId})<br/>
-> 3. 적절한 Status Code를 응답하였습니다. (예> TodoCard가 정상적으로 생성되었을 때, 성공 Status Code가 201)<br/>
-> 4. Path Variable을 이용하여 변수를 받아오도록 하였습니다. (예> fun getTodoCard(@PathVariable userid: Long))
+> 1. Resource의 이름을 명사, 소문자, 복수형으로 지향하였으며, '/'를 통해 계층 관계를 표현하였습니다. <br/>
+  (예> /todocards) <br/>
+> 2. id Resource를 가져오기 위해 Identifier를 포함하였습니다. <br/>
+  (예> /todocards/{userId}) <br/>
+> 3. 적절한 Status Code를 응답하였습니다. <br/>
+  (예> TodoCard가 정상적으로 생성되었을 때, 성공 Status Code가 201) <br/>
+> 4. Path Variable을 이용하여 변수를 받아오도록 하였습니다. <br/>
+  (예> fun getTodoCard(@PathVariable userid: Long))
 
 Q3. 적절한 관심사 분리를 적용하셨나요?<br/>
 > A. Spring의 Layer 구조와 DB에 맞추어 패키지를 나누었습니다. (Controller , Dto , model , repository , Service)
