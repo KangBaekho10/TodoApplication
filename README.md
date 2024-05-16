@@ -66,7 +66,8 @@ Q4. API 명세서 작성 가이드라인과 비교했을 때 자신의 API 명�
 
 #### 2. Use Case Diagram
 
-![image](https://github.com/KangBaekho10/TodoApplication/assets/166815465/d6156bca-3de1-4126-8b25-5cfbd2a39c0c)
+![20240516_172800](https://github.com/KangBaekho10/TodoApplication/assets/166815465/a9db859b-d5ee-4b4c-aaac-08907ec0e492)
+
 
 #### 3. API Specification
 
