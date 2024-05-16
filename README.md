@@ -76,11 +76,81 @@ Q4. API 명세서 작성 가이드라인과 비교했을때 자신의 API 명세
 
 Spring의 Layer 구조와 DB에 맞추어 패키지를 `Controller` , `Dto` , `Service` , `Repository`, `Model` 로 나누었습니다.
 
+- 동작 과정
 
+```Kotlin
+1) Web Layer에 해당하는 'Controller'에서 Client로부터 Request 받는다.
 
+2) Request에 맞는 함수를 'Dto'에서 찾아 Service Layer에 해당하는 'Service'로 넘겨준다.
 
+3)'Service'에서는 Request에 대한 실제 동작이 이루어진다. (삽입, 수정, 삭제, 조회)
 
+4) 'Service'는 Entity를 통해 동작한 Data를 Repository Layer에 해당하는 'Repository'로 넘겨준다.
 
+5) 'Repository'는 'Model'과 직접 연결되어 있고, 'Model'은 Repository에 의해 넘겨받은 Data를 DB에서 동작한다.
+
+6) 동작한 내용은 다시 역순으로 진행하고, Web Layer를 통해 Client에게 Response 해준다.
+```
+
+- Controller
+
+```Kotlin
+fun getTodoCard(@PathVariable userid: Long) : ResponseEntity<TodoCardResponse> {
+...
+} // 단일 카드 조회
+
+fun getTodoCardList(): ResponseEntity<List<TodoCardResponse>> {
+...
+} // 전체 카드 조회
+
+fun createTodoCard(@RequestBody createTodoCardRequest: CreateTodoCardRequest): ResponseEntity<TodoCardResponse> {
+...
+} // 할 일 카드 생성
+
+fun updateTodoCard(
+    @PathVariable userid: Long,
+    @RequestBody updateTodoCardRequest: UpdateTodoCardRequest
+) : ResponseEntity<TodoCardResponse> {
+...
+} // 할 일 카드 수정
+
+fun deleteTodoCard(@PathVariable userid: Long) : ResponseEntity<Unit> {
+...
+} // 할 일 카드 삭제
+```
+
+- Service
+
+```Kotlin
+fun getTodoCardById(userid: Long): TodoCardResponse // 단일 카드 조회
+
+fun getAllTodoCardList(): List<TodoCardResponse> // 전체 카드 조회
+
+fun createTodoCard(request: CreateTodoCardRequest): TodoCardResponse // 할 일 카드 생성
+
+fun updateTodoCard(userid: Long, request: UpdateTodoCardRequest): TodoCardResponse // 할 일 카드 수정
+
+fun deleteTodoCard(userid: Long) // 할 일 카드 삭제
+```
+
+- Repository
+
+```Kotlin
+interface TodoCardRepository: JpaRepository<TodoCard, Long> {}
+
+```
+
+- Model
+
+```Kotlin
+class TodoCard (
+...
+) // DATA에 맞는 DB Column을 지정
+
+fun TodoCard.toResponse(): TodoCardResponse { 
+...
+} // Column 일치하는 곳에 Data 삽입
+```
 
 ## 환경 설정<br>
 Language : Kotlin<br/>
