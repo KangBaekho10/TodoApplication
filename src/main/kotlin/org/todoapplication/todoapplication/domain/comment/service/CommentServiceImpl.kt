@@ -36,7 +36,7 @@ class CommentServiceImpl(
 
     @Transactional
     override fun updateComment(userId: Long, commentId: Long, request: CommentRequest): CommentResponse {
-        val comment = commentRepository.findBy(userId, commentId) ?: throw ModelNotFoundException("Comment", commentId)
+        val comment = commentRepository.findByTodoCardUseridAndCommentid(userId, commentId) ?: throw ModelNotFoundException("Comment", commentId)
 
         if (comment.writer == request.writer && comment.password == request.password) {
 
@@ -50,7 +50,7 @@ class CommentServiceImpl(
 
     @Transactional
     override fun deleteComment(userId: Long, commentId: Long) {
-        val comment = commentRepository.findBy(userId, commentId) ?: throw ModelNotFoundException("Comment", commentId)
+        val comment = commentRepository.findByTodoCardUseridAndCommentid(userId, commentId) ?: throw ModelNotFoundException("Comment", commentId)
         return commentRepository.delete(comment)
     }
 }
