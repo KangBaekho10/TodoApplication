@@ -14,12 +14,11 @@ class TodoCardController(
     private val todoCardService: TodoCardService
 ) {
 
-    @GetMapping("/{userid}")
-    fun getTodoCard(@PathVariable userid: Long) : ResponseEntity<TodoCardResponse> {
+    @GetMapping("/{userId}")
+    fun getTodoCard(@PathVariable userId: Long) : ResponseEntity<TodoCardResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(todoCardService.getTodoCardById(userid))
-
+            .body(todoCardService.getTodoCardById(userId))
     } // 단건 조회
 
     @GetMapping
@@ -36,19 +35,19 @@ class TodoCardController(
             .body(todoCardService.createTodoCard(createTodoCardRequest))
     } // 생성
 
-    @PutMapping("/{userid}")
+    @PutMapping("/{userId}")
     fun updateTodoCard(
-        @PathVariable userid: Long,
+        @PathVariable userId: Long,
         @RequestBody updateTodoCardRequest: UpdateTodoCardRequest
     ) : ResponseEntity<TodoCardResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(todoCardService.updateTodoCard(userid, updateTodoCardRequest))
+            .body(todoCardService.updateTodoCard(userId, updateTodoCardRequest))
     } // 수정
 
-    @DeleteMapping("/{userid}")
-    fun deleteTodoCard(@PathVariable userid: Long) : ResponseEntity<Unit> {
-        todoCardService.deleteTodoCard(userid)
+    @DeleteMapping("/{userId}")
+    fun deleteTodoCard(@PathVariable userId: Long) : ResponseEntity<Unit> {
+        todoCardService.deleteTodoCard(userId)
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
             .build()

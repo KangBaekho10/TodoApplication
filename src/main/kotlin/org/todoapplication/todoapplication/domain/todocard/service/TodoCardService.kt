@@ -7,11 +7,11 @@ import org.todoapplication.todoapplication.domain.todocard.dto.UpdateTodoCardReq
 interface TodoCardService {
     fun getAllTodoCardList(): List<TodoCardResponse>
 
-    fun getTodoCardById(userid: Long): TodoCardResponse
+    fun getTodoCardById(userId: Long): TodoCardResponse
 
     fun createTodoCard(request: CreateTodoCardRequest): TodoCardResponse
 
-    fun updateTodoCard(userid: Long, request: UpdateTodoCardRequest): TodoCardResponse
+    fun updateTodoCard(userId: Long, request: UpdateTodoCardRequest): TodoCardResponse
 
-    fun deleteTodoCard(userid: Long)
+    fun deleteTodoCard(userId: Long)
 }

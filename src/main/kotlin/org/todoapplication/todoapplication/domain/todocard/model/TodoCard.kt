@@ -1,23 +1,29 @@
 package org.todoapplication.todoapplication.domain.todocard.model
 
 import jakarta.persistence.*
+import org.jetbrains.annotations.NotNull
+import org.todoapplication.todoapplication.domain.comment.model.Comment
+import org.todoapplication.todoapplication.domain.comment.model.toResponse
 import org.todoapplication.todoapplication.domain.todocard.dto.TodoCardResponse
 import java.time.LocalDateTime
 
 @Entity
 @Table(name = "card")
 class TodoCard (
-    @Column(name = "writer", nullable = false)
+    @Column
+    @NotNull
     var writer : String,
-
-    @Column(name = "title", nullable = false)
     var title : String,
-
-    @Column(name = "content", nullable = false)
     var content : String,
-
-    @Column(name = "date", nullable = false)
     var date : LocalDateTime,
+
+    @Enumerated(EnumType.STRING)
+    @Column
+    @NotNull
+    var completed: TodoCardCompleted = TodoCardCompleted.FALSE,
+
+    @OneToMany(mappedBy = "todoCard", fetch = FetchType.LAZY)
+    val comment: MutableList<Comment> = mutableListOf()
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +32,12 @@ class TodoCard (
 
 fun TodoCard.toResponse(): TodoCardResponse {
     return TodoCardResponse(
-        userid = userid!!,
+        userId = userid!!,
         title = title,
         writer = writer,
         content = content,
         date = date,
+        completed = completed,
+        comments = comment.map { it.toResponse() }
     )
 }

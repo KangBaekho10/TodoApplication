@@ -4,4 +4,5 @@ data class UpdateTodoCardRequest(
     val writer: String,
     val title: String,
     val content: String,
+    val completed : Boolean,
 )
