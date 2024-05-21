@@ -13,8 +13,12 @@ Spring 과제로 투두앱 백엔드 서버를 만들었습니다. <br/>
 - [코드 구조](#코드-구조)
 
 ## 요구 사항
+
+<details>
+<summary>STEP 1</summary><div>
+  
 **할 일 카드 작성 기능**
-  > - `할 일 제목`, `할 일 내용`, `작성일`, `작성자 이름`을 저장할 수 있습니다.
+  > - `할 일 제목`, `할 일 내용`, `작성일`, `작성자 이름`을 입력받아 저장할 수 있습니다.
   > - 저장된 할 일의 정보를 반환받아 확인할 수 있습니다.
 
 **선택한 할 일 조회 기능**
@@ -25,15 +29,45 @@ Spring 과제로 투두앱 백엔드 서버를 만들었습니다. <br/>
   > - 등록된 할 일 전체를 조회할 수 있습니다.
   > - 조회된 할 일 목록은 작성일 기준 내림차순으로 정렬되어 있습니다.
 
-**선택할 할 일 수정 기능**
+**선택한 할 일 수정 기능**
   > - 선택한 할 일의 `할 일 제목`, `할 일 내용`, `작성자 이름`을 수정할 수 있습니다.
   > - 수정된 할 일의 정보를 반환받아 확인할 수 있습니다.
 
-**선택할 할 일 삭제 기능**
+**선택한 할 일 삭제 기능**
   > - 선택한 게시글을 삭제할 수 있습니다.
+
+</div></details>
+
+<details>
+<summary>STEP 2</summary><div>
+
+**할 일 카드 완료 기능**
+  > - 완료 처리할 할 일 카드는 목록 조회 시 `완료 여부` 필드가 `TRUE`로 내려갑니다.
+  > - `완료 여부` 기본 값은 `FALSE`입니다.
+
+**댓글 작성 기능**
+  > - `작성자 이름`, `비밀번호`, `댓글`을 입력받아 저장할 수 있습니다.
+  > - 응답에서 `비밀번호`는 제외하고 등록된 댓글을 반환합니다.
+
+**댓글 수정 기능**
+  > - `작성자 이름`, `비밀번호`를 입력받아 저장된 값과 일치하면 수정할 수 있습니다.
+  > - 응답에서 `비밀번호`는 제외하고 수정된 댓글을 반환합니다.
+
+**댓글 삭제 기능**
+  > - `작성자 이름`, `비밀번호`를 입력받아 저장된 값과 일치하면 삭제할 수 있습니다.
+  > - 응답에서 삭제 메시지와 상태 코드를 반환합니다.
+
+**댓글 조회 기능**
+  > - STEP 1에서 만든 할 일 조회 API의 응답에서 댓글을 조회할 수 있습니다.
+  > - 연관되지 않은 댓글은 포함되지 않아야 합니다. 
+
+</div></details>
 
 ## WHY?
 
+<details>
+<summary>STEP 1</summary><div>
+  
 Q1. API의 request를 어떤 방식으로 사용하셨나요?
 > A. Request Body 방식을 사용하였습니다. 이유는 다음과 같습니다.<br/>
 >
@@ -58,16 +92,45 @@ Q3. 적절한 관심사 분리를 적용하셨나요?<br/>
 Q4. API 명세서 작성 가이드라인과 비교했을 때 자신의 API 명세서<br/>
 > A. 규모가 큰 프로젝트가 아니라서 제외한 항목이 많았던 것 같습니다.
 
+</div></details>
+
+<details>
+<summary>STEP 2</summary><div>
+
+Q1. 처음 설계한 API 명세서에 변경사항이 있었나요? 변경되었다면 어떤 점 때문일까요?
+> A. 댓글 기능에 대한 추가 사항이 존재하였습니다. 기능을 늘리면 자연스럽게 API 명세서도 늘어났다고 생각합니다.<br/>
+
+Q2. 첫 설계의 중요성에 대해 작성해주세요!
+> A. 첫 설계를 디테일하게 할수록 추가 요구사항을 적용할 때 변경에 대한 수고가 줄어든다는 것을 알게 되었습니다.<br/>
+
+Q3. ERD를 먼저 설계한 후 Entity를 개발했을 때 어떤 점이 도움이 되셨나요?
+> A. 테이블명과 칼럼 이름을 미리 정해두고, 연관 관계를 설정해두어서 코드 동작 설계를 편하게 할 수 있었습니다.<br/>
+
+Q4. 댓글 여러 개 달려있는 할 일을 삭제하려고 한다면 무슨 문제가 발생할까요? DB 테이블 관점에서 해결 방법이 무엇일까요?
+> A. 서버 오류가 발생하며 삭제 동작이 진행되지 않습니다.<br/>
+> 하지만 할 일을 삭제할 때 댓글까지 삭제할 수 있게 CASCADE라는 영속성 전이를 이용하면 해결 가능합니다.<br/>
+
+Q4. IoC / DI에 대해 간략하게 설명해 주세요.
+> A. 간략하게 설명하도록 하겠습니다.<br/>
+> * IoC : 객체의 생성과 생명 주기를 외부에서 제어하는 디자인 패턴<br/>
+> * DI : 객체가 필요한 의존성을 자체적으로 생성하는 것이 아니라, 외부에서 주입받는 디자인 패턴<br/>
+>
+> ∴ DI ⊂ IoC
+
+</div></details>
+
 ## 기획 및 설계
 
+<details>
+<summary>STEP 1</summary><div>
+  
 #### 1. Event Storming
-     
+
 ![image](https://github.com/KangBaekho10/TodoApplication/assets/166815465/e6a10243-5c12-4dbd-931d-1ede39275e36)
 
 #### 2. Use Case Diagram
 
 ![20240516_172800](https://github.com/KangBaekho10/TodoApplication/assets/166815465/a9db859b-d5ee-4b4c-aaac-08907ec0e492)
-
 
 #### 3. API Specification
 
@@ -77,7 +140,33 @@ Q4. API 명세서 작성 가이드라인과 비교했을 때 자신의 API 명�
 
 ![image](https://github.com/KangBaekho10/TodoApplication/assets/166815465/f06de950-2c98-4c3d-a748-27a5995d4af8)
 
+</div></details>
+
+<details>
+<summary>STEP 2</summary><div>
+
+#### 1. Event Storming
+
+![image](https://github.com/KangBaekho10/TodoApplication/assets/166815465/5c7dbfdb-3cc4-498a-aab4-4cde2d31902c)
+
+
+#### 2. Use Case Diagram
+
+![image](https://github.com/KangBaekho10/TodoApplication/assets/166815465/2aed2a28-08bd-403a-a052-859e5cfc5086)
+
+#### 3. API Specification
+
+![image](https://github.com/KangBaekho10/TodoApplication/assets/166815465/acacbbb5-4fe8-4158-8ae5-9583fde05b4a)
+
+#### 4. ERD
+
+![image](https://github.com/KangBaekho10/TodoApplication/assets/166815465/660fa781-6850-45bb-a446-e4252776c1c8)
+
+</div></details>
+
 ## 코드 구조
+
+할 일 카드에 대한 `TodoCard`와 댓글 대한 `Comment`로 API를 나누었습니다.
 
 Spring의 Layer 구조와 DB에 맞추어 패키지를 `Controller` , `Dto` , `Service` , `Repository`, `Model`로 나누었습니다.
 
@@ -88,7 +177,7 @@ Spring의 Layer 구조와 DB에 맞추어 패키지를 `Controller` , `Dto` , `S
 
 2) Request에 맞는 함수를 'Dto'에서 찾아 Service Layer에 해당하는 'Service'로 넘겨준다.
 
-3)'Service'에서는 Request에 대한 실제 동작이 이루어진다. (삽입, 수정, 삭제, 조회)
+3) 'Service'에서는 Request에 대한 실제 동작이 이루어진다. (삽입, 수정, 삭제, 조회)
 
 4) 'Service'는 Entity를 통해 동작한 Data를 Repository Layer에 해당하는 'Repository'로 넘겨준다.
 
@@ -97,50 +186,68 @@ Spring의 Layer 구조와 DB에 맞추어 패키지를 `Controller` , `Dto` , `S
 6) 동작한 내용은 다시 역순으로 진행하고, Web Layer를 통해 Client에게 Response 해준다.
 ```
 
+<details>
+<summary> TodoCard </summary><div>
+
 - Controller
 
 ```Kotlin
-fun getTodoCard(@PathVariable userid: Long) : ResponseEntity<TodoCardResponse> {
-...
-} // 단일 카드 조회
 
+// 단일 카드 조회
+fun getTodoCard(@PathVariable userId: Long) : ResponseEntity<TodoCardResponse> {
+...
+}
+
+// 전체 카드 조회
 fun getTodoCardList(): ResponseEntity<List<TodoCardResponse>> {
 ...
-} // 전체 카드 조회
+}
 
+// 할 일 카드 생성
 fun createTodoCard(@RequestBody createTodoCardRequest: CreateTodoCardRequest): ResponseEntity<TodoCardResponse> {
 ...
-} // 할 일 카드 생성
+}
 
+// 할 일 카드 수정
 fun updateTodoCard(
-    @PathVariable userid: Long,
+    @PathVariable userId: Long,
     @RequestBody updateTodoCardRequest: UpdateTodoCardRequest
 ) : ResponseEntity<TodoCardResponse> {
 ...
-} // 할 일 카드 수정
+}
 
-fun deleteTodoCard(@PathVariable userid: Long) : ResponseEntity<Unit> {
+// 할 일 카드 삭제
+fun deleteTodoCard(@PathVariable userId: Long) : ResponseEntity<Unit> {
 ...
-} // 할 일 카드 삭제
+}
+
 ```
 
 - Service
 
 ```Kotlin
-fun getTodoCardById(userid: Long): TodoCardResponse // 단일 카드 조회
 
-fun getAllTodoCardList(): List<TodoCardResponse> // 전체 카드 조회
+// 단일 카드 조회
+fun getTodoCardById(userId: Long): TodoCardResponse
 
-fun createTodoCard(request: CreateTodoCardRequest): TodoCardResponse // 할 일 카드 생성
+// 전체 카드 조회
+fun getAllTodoCardList(): List<TodoCardResponse>
 
-fun updateTodoCard(userid: Long, request: UpdateTodoCardRequest): TodoCardResponse // 할 일 카드 수정
+// 할 일 카드 생성
+fun createTodoCard(request: CreateTodoCardRequest): TodoCardResponse
 
-fun deleteTodoCard(userid: Long) // 할 일 카드 삭제
+// 할 일 카드 수정
+fun updateTodoCard(userId: Long, request: UpdateTodoCardRequest): TodoCardResponse
+
+// 할 일 카드 삭제
+fun deleteTodoCard(userId: Long)
+
 ```
 
 - Repository
 
 ```Kotlin
+
 interface TodoCardRepository: JpaRepository<TodoCard, Long> {}
 
 ```
@@ -148,14 +255,109 @@ interface TodoCardRepository: JpaRepository<TodoCard, Long> {}
 - Model
 
 ```Kotlin
+
+// 1:N
+// DATA에 맞는 DB Column을 지정
 class TodoCard (
 ...
-) // DATA에 맞는 DB Column을 지정
+    @OneToMany(mappedBy = "todoCard", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
+    val comment: MutableList<Comment> = mutableListOf()
+...
+)
 
+// Column 일치하는 곳에 DATA 삽입
 fun TodoCard.toResponse(): TodoCardResponse { 
 ...
-} // Column 일치하는 곳에 Data 삽입
+}
+
 ```
+
+</div></details>
+
+<details>
+<summary> Comment </summary><div>
+
+- Controller
+
+```Kotlin
+
+// 댓글 생성
+fun createComment(
+  @PathVariable userId: Long,
+  @RequestBody commentRequest: CommentRequest
+): ResponseEntity<CommentResponse> {
+...
+}
+
+// 댓글 수정
+fun updateComment(
+  @PathVariable userId: Long,
+  @PathVariable commentId: Long,
+  @RequestBody commentRequest: CommentRequest
+): ResponseEntity<CommentResponse> {
+...
+}
+
+// 댓글 삭제
+fun updateComment(
+  @PathVariable userId: Long,
+  @PathVariable commentId: Long,
+  @RequestBody commentRequest: CommentRequest
+): ResponseEntity<CommentResponse> {
+...
+}
+
+```
+
+- Service
+
+```Kotlin
+
+// 댓글 조회 (할 일 카드에서 조회 가능)
+fun getComment(commentId : Long) : CommentResponse
+
+// userId로 할 일 카드를 지정하여 댓글 생성
+fun createComment(userId: Long, request: CommentRequest) : CommentResponse
+
+// userId로 할 일 카드를 지정하여 댓글 수정
+fun updateComment(userId: Long, commentId: Long, request: CommentRequest) : CommentResponse
+
+// userId로 할 일 카드를 지정하여 댓글 삭제
+fun deleteComment(userId: Long, commentId: Long, request: DeleteCommentRequest)
+
+```
+
+- Repository
+
+```Kotlin
+
+interface CommentRepository: JpaRepository<Comment, Long> {
+    fun findByTodoCardUseridAndCommentid(userId: Long, commentId: Long): Comment?
+}
+
+```
+
+- Model
+
+```Kotlin
+
+class Comment (
+...
+// N:1
+// DATA에 맞는 DB Column 지정
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userid")
+    val todoCard: TodoCard,
+...
+)
+// Column 일치하는 곳에 DATA 삽입
+fun Comment.toResponse(): CommentResponse{
+...
+}
+
+```
+
+</div></details>
 
 ## 환경 설정<br>
 Language : Kotlin<br/>
