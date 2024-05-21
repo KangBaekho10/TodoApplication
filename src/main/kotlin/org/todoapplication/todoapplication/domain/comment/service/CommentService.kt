@@ -2,6 +2,7 @@ package org.todoapplication.todoapplication.domain.comment.service
 
 import org.todoapplication.todoapplication.domain.comment.dto.CommentResponse
 import org.todoapplication.todoapplication.domain.comment.dto.CommentRequest
+import org.todoapplication.todoapplication.domain.comment.dto.DeleteCommentRequest
 
 interface CommentService {
     fun getComment(commentId : Long) : CommentResponse
@@ -10,5 +11,5 @@ interface CommentService {
 
     fun updateComment(userId: Long, commentId: Long, request: CommentRequest) : CommentResponse
 
-    fun deleteComment(userId: Long, commentId: Long)
+    fun deleteComment(userId: Long, commentId: Long, request: DeleteCommentRequest)
 }

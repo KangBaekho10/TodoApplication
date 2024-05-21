@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.todoapplication.todoapplication.domain.comment.dto.CommentRequest
 import org.todoapplication.todoapplication.domain.comment.dto.CommentResponse
+import org.todoapplication.todoapplication.domain.comment.dto.DeleteCommentRequest
 import org.todoapplication.todoapplication.domain.comment.service.CommentService
 
 @RequestMapping("/todocards/{userId}")
@@ -36,9 +37,10 @@ class CommentController(
     @DeleteMapping("/comments/{commentId}")
     fun deleteComment(
         @PathVariable userId: Long,
-        @PathVariable commentId: Long
+        @PathVariable commentId: Long,
+        @RequestBody deleteCommentRequest: DeleteCommentRequest
     ): ResponseEntity<Unit> {
-        commentService.deleteComment(userId, commentId)
+        commentService.deleteComment(userId, commentId, deleteCommentRequest)
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
             .build()

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.todoapplication.todoapplication.domain.comment.dto.CommentResponse
 import org.todoapplication.todoapplication.domain.comment.dto.CommentRequest
+import org.todoapplication.todoapplication.domain.comment.dto.DeleteCommentRequest
 import org.todoapplication.todoapplication.domain.comment.model.Comment
 import org.todoapplication.todoapplication.domain.comment.model.toResponse
 import org.todoapplication.todoapplication.domain.comment.repository.CommentRepository
@@ -49,8 +50,10 @@ class CommentServiceImpl(
     }
 
     @Transactional
-    override fun deleteComment(userId: Long, commentId: Long) {
+    override fun deleteComment(userId: Long, commentId: Long, request: DeleteCommentRequest) {
         val comment = commentRepository.findByTodoCardUseridAndCommentid(userId, commentId) ?: throw ModelNotFoundException("Comment", commentId)
+        if (comment.writer == request.writer && comment.password == request.password) {
         return commentRepository.delete(comment)
+            }
     }
 }

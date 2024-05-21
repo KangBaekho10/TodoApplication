@@ -22,7 +22,7 @@ class TodoCard (
     @NotNull
     var completed: TodoCardCompleted = TodoCardCompleted.FALSE,
 
-    @OneToMany(mappedBy = "todoCard", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "todoCard", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
     val comment: MutableList<Comment> = mutableListOf()
 ) {
     @Id
