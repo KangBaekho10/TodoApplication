@@ -54,6 +54,8 @@ class CommentServiceImpl(
         val comment = commentRepository.findByTodoCardUseridAndCommentid(userId, commentId) ?: throw ModelNotFoundException("Comment", commentId)
         if (comment.writer == request.writer && comment.password == request.password) {
         return commentRepository.delete(comment)
-            }
+            } else {
+            throw IllegalArgumentException("작성 이름 또는 비밀번호가 일치하지 않습니다.")
+        }
     }
 }
