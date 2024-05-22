@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
 
 data class UpdateTodoCardRequest(
+    @field:NotBlank
     val writer: String,
 
     @field:NotBlank
