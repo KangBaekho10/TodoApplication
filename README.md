@@ -63,6 +63,32 @@ Spring 과제로 투두앱 백엔드 서버를 만들었습니다. <br/>
 
 </div></details>
 
+<details>
+<summary>STEP 3</summary><div>
+  
+**할 일 카드 정렬 기능**
+  > - API를 요청할 때 정렬(`오름차순`, `내림차순`)을 포함합니다.
+  > - 정렬 기준을 통해 정렬한 할 일 목록을 반환합니다.
+
+**할 일 카드 필터 기능**
+  > - API를 요청할 때 작성자 이름 기준으로 목록을 반환합니다.
+
+**할 일 카드 검증 기능**
+  > - 할 일 카드를 작성하거나 수정할 때 검사합니다.
+  > - 할 일 카드의 제목이 1자 이상, 200자 이하인지 검사합니다.
+  > - 할 일 카드의 본문이 1자 이상, 1000자 이하인지 검사합니다.
+  > - 조건을 충족하지 않는다면 기능 실패로 응답합니다.
+
+**할 일 카드 응답 코드 반환**
+  > - ReponseEntity를 사용하여 API의 응답을 Status 코드로 반환합니다.
+  > - 조회 기능 성공: status 200 OK
+  > - 작성 기능 성공: status 201 Created
+  > - 수정 기능 성공: status 200 OK
+  > - 삭제 기능 성공: status 204 No Content
+  > - 작성, 수정 기능 실패: status 400 Bad Request
+
+</div></details>
+
 ## WHY?
 
 <details>
@@ -143,7 +169,7 @@ Q4. IoC / DI에 대해 간략하게 설명해 주세요.
 </div></details>
 
 <details>
-<summary>STEP 2</summary><div>
+<summary>STEP 2, 3</summary><div>
 
 #### 1. Event Storming
 
@@ -360,6 +386,8 @@ fun Comment.toResponse(): CommentResponse{
 </div></details>
 
 ## 환경 설정<br>
-Language : Kotlin<br/>
-IDLE : IntelliJ IDEA Ultimate<br/>
-JDK : 17.0.11 <br/>
+![Kotlin](https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white)
+![IntelliJ IDEA](https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white) 
+![Jdk17](https://img.shields.io/badge/jdk17-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white"/)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
