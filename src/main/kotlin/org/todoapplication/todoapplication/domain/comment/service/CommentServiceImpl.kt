@@ -45,7 +45,7 @@ class CommentServiceImpl(
 
             return commentRepository.save(comment).toResponse()
         } else {
-            throw IllegalArgumentException("작성 이름 또는 비밀번호가 일치하지 않습니다.")
+            throw IllegalArgumentException("Writer or Password does not match.")
         }
     }
 
@@ -55,7 +55,7 @@ class CommentServiceImpl(
         if (comment.writer == request.writer && comment.password == request.password) {
         return commentRepository.delete(comment)
             } else {
-            throw IllegalArgumentException("작성 이름 또는 비밀번호가 일치하지 않습니다.")
+            throw IllegalArgumentException("Writer or Password does not match.")
         }
     }
 }
