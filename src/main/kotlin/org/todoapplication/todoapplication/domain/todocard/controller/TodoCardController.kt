@@ -26,10 +26,12 @@ class TodoCardController(
     @GetMapping
     fun getTodoCardList(
         @RequestParam(defaultValue = "desc") sort: String,
-        @RequestParam(defaultValue = "") writer: String
+        @RequestParam(defaultValue = "") writer: String,
+        @RequestParam(required = false, defaultValue = "0", value = "Page") pageNo : Int,
+        @RequestParam(required = false, defaultValue = "10", value = "Card") count : Int
     ): ResponseEntity<List<TodoCardResponse>> {
-        val todoCards = if (writer.isNotEmpty()) todoCardService.getAllTodoCardList()
-            .filter { it.writer == writer } else todoCardService.getAllTodoCardList()
+        val todoCards = if (writer.isNotEmpty()) todoCardService.getAllTodoCardList(pageNo, count)
+            .filter { it.writer == writer } else todoCardService.getAllTodoCardList(pageNo, count)
 
         val sortedTodoCard = when (sort) {
             "desc" -> todoCards.sortedByDescending { it.date }

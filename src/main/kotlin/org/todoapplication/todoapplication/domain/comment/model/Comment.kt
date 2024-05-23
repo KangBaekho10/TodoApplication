@@ -17,15 +17,16 @@ class Comment (
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid")
     val todoCard: TodoCard,
+
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var commentid : Long? = null
+    var commentId : Long? = null
 }
 
 fun Comment.toResponse(): CommentResponse{
     return CommentResponse(
-        commentId = commentid!!,
+        commentId = commentId!!,
         content = content,
         writer = writer,
     )

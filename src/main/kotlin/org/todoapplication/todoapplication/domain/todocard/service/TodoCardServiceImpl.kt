@@ -1,5 +1,8 @@
 package org.todoapplication.todoapplication.domain.todocard.service
 
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -17,8 +20,9 @@ class TodoCardServiceImpl(
     private val todoCardRepository: TodoCardRepository,
 ): TodoCardService {
 
-    override fun getAllTodoCardList(): List<TodoCardResponse>{
-        return todoCardRepository.findAll().map { it.toResponse() }
+    override fun getAllTodoCardList(pageNo: Int, count: Int): Page<TodoCardResponse> {
+        val pageable: Pageable = PageRequest.of(pageNo, count)
+        return todoCardRepository.findAllBy(pageable).map { it.toResponse() }
     }
 
     override fun getTodoCardById(userId: Long): TodoCardResponse{
