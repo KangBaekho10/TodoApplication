@@ -7,6 +7,7 @@ import org.todoapplication.todoapplication.domain.user.dto.UserRequest
 import org.todoapplication.todoapplication.domain.user.dto.UserResponse
 import org.todoapplication.todoapplication.domain.user.service.UserService
 
+@RequestMapping("/users")
 @RestController
 class UserController(
     private val userService: UserService
