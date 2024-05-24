@@ -210,7 +210,11 @@ Q4. IoC / DI에 대해 간략하게 설명해 주세요.
 
 #### 2. Use Case Diagram
 
+![image](https://github.com/KangBaekho10/TodoApplication/assets/166815465/2ae4bff6-4df0-4ae2-be77-4597aa227e6b)
+
 #### 3. API Specification
+
+![image](https://github.com/KangBaekho10/TodoApplication/assets/166815465/bab663e3-3dcb-4916-b8d4-f73f089f1336)
 
 #### 4. ERD
   
@@ -309,7 +313,7 @@ interface TodoCardRepository: JpaRepository<TodoCard, Long> {}
 - Model
 
 ```Kotlin
-
+...
 // 1:N
 // DATA에 맞는 DB Column을 지정
 class TodoCard (
@@ -406,6 +410,64 @@ class Comment (
 )
 // Column 일치하는 곳에 DATA 삽입
 fun Comment.toResponse(): CommentResponse{
+...
+}
+
+```
+
+</div></details>
+
+<details>
+<summary> User </summary><div>
+
+- Controller
+
+```Kotlin
+
+@PostMapping("/signup")
+fun createUser(@RequestBody userRequest: UserRequest): ResponseEntity<UserResponse> {
+...
+}
+// 사용자 생성
+...
+fun login(@RequestBody userRequest: UserRequest): ResponseEntity<UserResponse>{
+...
+}
+// 사용자 로그인
+
+```
+
+- Service
+
+```Kotlin
+
+fun createUser(request: UserRequest): UserResponse
+//사용자 생성
+
+fun login(request: UserRequest): UserResponse
+// 사용자 로그인
+
+```
+
+- Repository
+
+```Kotlin
+
+interface UserRepository: JpaRepository<User, Long> {
+    fun findByEmailAndPassword(email: String, password: String): User
+}
+
+```
+
+- Model
+
+```Kotlin
+
+class User(
+)
+...
+// Column 일치하는 곳에 DATA 삽입
+fun User.toResponse(): UserResponse {
 ...
 }
 
