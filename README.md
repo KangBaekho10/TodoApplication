@@ -89,6 +89,18 @@ Spring 과제로 투두앱 백엔드 서버를 만들었습니다. <br/>
 
 </div></details>
 
+<details>
+<summary>STEP 4</summary><div>
+  
+**개발 완료**
+  > - 사용자가 많아졌을 때 페이지 혹은 카드의 개수를 지정해서 조회합니다.
+  > - 회원가입, 로그인이 가능합니다.
+
+**추후 개발 예정**
+> - 인증, 인가에 대해서 요청한 사용자를 구분하여 수정 삭제가 가능합니다.
+
+</div></details>
+
 ## WHY?
 
 <details>
@@ -175,7 +187,6 @@ Q4. IoC / DI에 대해 간략하게 설명해 주세요.
 
 ![image](https://github.com/KangBaekho10/TodoApplication/assets/166815465/5c7dbfdb-3cc4-498a-aab4-4cde2d31902c)
 
-
 #### 2. Use Case Diagram
 
 ![image](https://github.com/KangBaekho10/TodoApplication/assets/166815465/2aed2a28-08bd-403a-a052-859e5cfc5086)
@@ -187,6 +198,23 @@ Q4. IoC / DI에 대해 간략하게 설명해 주세요.
 #### 4. ERD
 
 ![image](https://github.com/KangBaekho10/TodoApplication/assets/166815465/660fa781-6850-45bb-a446-e4252776c1c8)
+
+</div></details>
+
+<details>
+<summary>STEP 4</summary><div>
+
+#### 1. Event Storming
+
+![image](https://github.com/KangBaekho10/TodoApplication/assets/166815465/a90fb0c5-b9fc-43c1-8f36-8c2338f96912)
+
+#### 2. Use Case Diagram
+
+#### 3. API Specification
+
+#### 4. ERD
+  
+![image](https://github.com/KangBaekho10/TodoApplication/assets/166815465/bdd9230e-fd34-4268-9c22-8ec94a6cbde2)
 
 </div></details>
 
